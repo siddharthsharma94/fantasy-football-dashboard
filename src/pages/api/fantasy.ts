@@ -1,3 +1,4 @@
+//@ts-nocheck
 import players from "@/nfl_players.json";
 
 const fetchFromAPI = async (url: string) => {
