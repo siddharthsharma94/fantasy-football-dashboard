@@ -89,12 +89,16 @@ export const getLeagueState = async (leagueId: string): Promise<Team[]> => {
   )) as Matchup[];
 
   const teams = rosters.map((roster: Roster) => {
-    const user = users.find((user: User) => user.user_id === roster.owner_id);
+    const user = users.find(
+      (user: User) => user.user_id === roster.owner_id,
+    ) as User;
     const starters = roster.starters.map((playerId: string) =>
+      //@ts-ignore
       mapPlayerData(playerId, players),
     );
     const bench = roster.players
       .filter((playerId: string) => !roster.starters.includes(playerId))
+      //@ts-ignore
       .map((playerId: string) => mapPlayerData(playerId, players));
     const matchup = matchups.find(
       (matchup: Matchup) => matchup.roster_id === roster.roster_id,
