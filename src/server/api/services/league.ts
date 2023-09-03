@@ -1,7 +1,7 @@
 import { z } from "zod";
 import players from "@/nfl_players.json";
 
-interface Player {
+export interface Player {
   player_id: string;
   espn_id: string | null;
   team: string;
@@ -12,12 +12,12 @@ interface Player {
   fantasy_positions: string[];
 }
 
-const fetchFromAPI = async (url: string): Promise<any> => {
+export const fetchFromAPI = async (url: string): Promise<any> => {
   const response = await fetch(url);
   return await response.json();
 };
 
-const mapPlayerData = (
+export const mapPlayerData = (
   playerId: string,
   players: Record<string, Player>,
 ): Player => {
@@ -38,31 +38,31 @@ export const LeagueState = z.object({
   leagueId: z.string(),
 });
 
-interface League {
+export interface League {
   league_id: string;
   name: string;
   avatar: string;
   current_week: number;
 }
 
-interface Roster {
+export interface Roster {
   roster_id: number;
   owner_id: string;
   players: string[];
   starters: string[];
 }
 
-interface User {
+export interface User {
   user_id: string;
   display_name: string;
 }
 
-interface Matchup {
+export interface Matchup {
   roster_id: number;
   matchup_id: number;
 }
 
-interface Team {
+export interface Team {
   user: string;
   roster: {
     starters: Player[];
